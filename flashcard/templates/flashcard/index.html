@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Hi</h1>
-</body>
-</html>
+{% extends "flashcard/layout.html" %}
+
+{% block body %}
+    {% for set in sets %}
+    <h1>{{ set.title }}</h1>
+    <p>set.owner</p>
+    <h4>{{ set.term }}</h4>
+    <img src="{{ set.image }}" alt="image">
+    <h4>{{ set.description }}</h4>
+    {% endfor %}
+{% endblock %}
