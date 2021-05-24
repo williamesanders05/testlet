@@ -14,6 +14,31 @@ def index(request):
         'sets':sets
     })
 
+@login_required(login_url= "login")
+def createset(request):
+    if request.method == "POST":
+        sets =  Set(
+            title = request.POST["title"],
+            owner = request.user.username
+            description = request.POST["description"]
+        )
+        sets.save()
+        return HttpResponseRedirect(reverse("createterms", args=(sets.id)))
+    return render(request, "flashcard/createset.html")
+
+@login_required(login_url= "login")
+def createterms(request, set_id):
+    if request.method == "POST":
+        term = Terms(
+            term = request.POST["term"],
+            definition = request.POST["definition"]
+            image = request.POST["image"],
+            set = set_id
+        )
+        term.save()
+        return HttpResponseRedirect(reverse('index'))
+    return render(request, "flashcard/createterm.html")
+
 def login_view(request):
     if request.method == "POST":
 
