@@ -19,7 +19,7 @@ def createset(request):
     if request.method == "POST":
         sets =  Set(
             title = request.POST["title"],
-            owner = request.user.username
+            owner = request.user.username,
             description = request.POST["description"]
         )
         sets.save()
